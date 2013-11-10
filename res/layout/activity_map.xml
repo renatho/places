@@ -16,70 +16,13 @@
             android:id="@+id/textView1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtDistancia"/>
+            android:text="@string/txtLocaisProximos"/>
         
         <TextView
-            android:id="@+id/txtDistance"
+            android:id="@+id/txtLocaisProximos"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txtEscondidoPor"/>
-        
-        <TextView
-            android:id="@+id/txtNome"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txtEscondidoEm"/>
-        
-        <TextView
-            android:id="@+id/txtData"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txtDica"/>
-        
-        <TextView
-            android:id="@+id/txtDica"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/btnPegaTesouro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btnPegaTesouro"
-                android:visibility="invisible" />
-
-            <Button
-                android:id="@+id/btnLargaTesouro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btnLargaTesouro"
-                android:visibility="invisible" />
-
-        </LinearLayout>
 
 	    <com.google.android.maps.MapView
 	        android:id="@+id/mapview"

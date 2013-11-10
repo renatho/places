@@ -1,10 +1,11 @@
 package com.app.places;
 
 import android.os.Bundle;
-import android.app.Activity;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapView;
 import android.view.Menu;
 
-public class MapActivity extends Activity {
+public class MapViewActivity extends MapActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,12 @@ public class MapActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.map, menu);
 		return true;
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

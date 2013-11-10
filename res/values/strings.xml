@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Places</string>
     <string name="action_settings">Settings</string>
-    <string name="usuario">Usuário</string>
-    <string name="senha">Senha</string>
-    <string name="acessar">Acessar</string>
-    <string name="ttlErroLogin">Login</string>
-    <string name="msgErroLogin">Usuário e/ou senha incorretos.</string>
-    <string name="txtDistancia">Distância do tesouro:</string>
-    <string name="cadastre">Cadastre-se</string>
-    <string name="urlCadastro">http://www.toctocweb.com.br/caca-ao-tesouro/</string>
-    <string name="txtEscondidoPor">Escondido por:</string>
-    <string name="txtEscondidoEm">Escondido em:</string>
-    <string name="txtDica">Dica:</string>
-    <string name="btnPegaTesouro">Capturar tesouro</string>
-    <string name="btnLargaTesouro">Esconder tesouro</string>
-
+    <string name="txtLocaisProximos">Locais próimos</string>
 </resources>
