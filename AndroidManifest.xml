@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -16,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.app.places.MapViewActivity"
+            android:name="com.app.places.Login"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.app.places.MapViewActivity"
+            android:label="@string/app_name" >
+            <meta-data
+            	android:name="android.support.PARENT_ACTIVITY"
+            	android:value="Login"/>
+        </activity>
+        <activity
+            android:name="com.app.places.ProfileActivity"
+            android:label="@string/app_name" >
+            <meta-data
+            	android:name="android.support.PARENT_ACTIVITY"
+            	android:value="Login"/>
+        </activity>
+
         <uses-library android:name="com.google.android.maps" />
     </application>
 
