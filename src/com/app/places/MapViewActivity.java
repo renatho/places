@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.maps.GeoPoint;
@@ -20,7 +21,11 @@ public class MapViewActivity extends MapActivity {
 	MapView mapView;
 	int count;
 	TextView txtLocaisProximos;
-
+	
+	List<Overlay> mapOverlays;
+	Drawable drawable;
+	MapItemizedOverlay itemizedoverlay;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,43 +34,12 @@ public class MapViewActivity extends MapActivity {
 		txtLocaisProximos = (TextView) findViewById(R.id.txtLocaisProximos);
     	mapView = (MapView) findViewById(R.id.mapview);
     	mapView.setBuiltInZoomControls(true);
-    	
-    	// Chama dados do banco
-		DatabaseHelper db = new DatabaseHelper();
 
-		try {
-			db.open();
-			ResultSet rs = db.executeQuery("select * counter from places");
-			rs.next();
-			count = rs.getRow();
+    	mapOverlays = mapView.getOverlays();
+    	drawable = this.getResources().getDrawable(R.drawable.marker_map);
+    	itemizedoverlay = new MapItemizedOverlay(drawable, this);
 
-	    	// Insere pinos
-	    	List<Overlay> mapOverlays = mapView.getOverlays();
-	    	Drawable drawable = this.getResources().getDrawable(R.drawable.marker_map);
-	    	MapItemizedOverlay itemizedoverlay = new MapItemizedOverlay(drawable, this);
-	    	
-	    	//for () {
-		    	GeoPoint point = new GeoPoint(19240000,-99120000);
-		    	OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
-	
-		    	//GeoPoint point2 = new GeoPoint(35410000, 139460000);
-		    	//OverlayItem overlayitem2 = new OverlayItem(point2, "Sekai, konichiwa!", "I'm in Japan!");
-	
-		    	itemizedoverlay.addOverlay(overlayitem);
-		    	//itemizedoverlay.addOverlay(overlayitem2);
-			//}
-	    	mapOverlays.add(itemizedoverlay);
-			
-	    	// Fecha banco
-			rs.close();
-			db.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
-
-		//txtLocaisProximos.setText(Integer.toString(count));
-		txtLocaisProximos.setText("10");
+    	new loadPins().execute();
 	}
 
 	@Override
@@ -79,6 +53,46 @@ public class MapViewActivity extends MapActivity {
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public class loadPins extends AsyncTask<Integer, String, Integer> {
+
+		@Override
+		protected Integer doInBackground(Integer... params) {
+	    	
+	    	// Chama dados do banco
+			DatabaseHelper db = new DatabaseHelper();
+
+			try {
+				db.open();
+				ResultSet rs = db.executeQuery("select * from places");
+				count = 0;
+
+		    	// Insere pinos
+				while (rs.next()) {
+					count++;
+			    	GeoPoint point = new GeoPoint(rs.getInt("lat"), rs.getInt("long"));
+			    	OverlayItem overlayitem = new OverlayItem(point, "Local", rs.getString("description"));
+
+			    	itemizedoverlay.addOverlay(overlayitem);
+				}
+		    	mapOverlays.add(itemizedoverlay);
+
+		    	// Fecha banco
+				rs.close();
+				db.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return count;
+		}
+		
+        @Override
+        protected void onPostExecute(Integer result) {
+        	txtLocaisProximos.setText(Integer.toString(result));
+        }
+		
 	}
 
 }
