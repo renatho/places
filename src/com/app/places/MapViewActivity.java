@@ -73,9 +73,11 @@ public class MapViewActivity extends MapActivity {
 														  "tagByProfile.idProfile = profile.id AND " +
 														  "profile.age <= places.max_age AND " +
 														  "profile.age >= places.min_age AND " +
+														  "DATE_FORMAT( CURRENT_TIMESTAMP( ) , '%H') >= places.min_hour AND " +
+														  "DATE_FORMAT( CURRENT_TIMESTAMP( ) , '%H') <= places.max_hour AND " +
 														  "profile.id = 2");
-
 				// ***** O 2 do select Ž o id do profile. Deve ser alterado quando o login estiver integrado.
+				
 				count = 0;
 
 		    	// Insere pinos
