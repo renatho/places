@@ -65,7 +65,17 @@ public class MapViewActivity extends MapActivity {
 
 			try {
 				db.open();
-				ResultSet rs = db.executeQuery("select * from places");
+				ResultSet rs = db.executeQuery("SELECT places.description, places.lat, places.long " +
+													"FROM places, profile, tagByProfile, tags, tagsByPlace " +
+													"WHERE places.id = tagsByPlace.idPlace AND " +
+														  "tagsByPlace.idTags = tags.idTag AND " +
+														  "tagByProfile.idTag = tags.idTag AND " +
+														  "tagByProfile.idProfile = profile.id AND " +
+														  "profile.age <= places.max_age AND " +
+														  "profile.age >= places.min_age AND " +
+														  "profile.id = 2");
+
+				// ***** O 2 do select Ž o id do profile. Deve ser alterado quando o login estiver integrado.
 				count = 0;
 
 		    	// Insere pinos
