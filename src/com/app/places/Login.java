@@ -102,8 +102,10 @@ public class Login extends Activity {
         protected void onPostExecute(Integer result) {
         	
     	_dialog.dismiss();
-        if (result > 0){
+        if (result > 0){        	 
         	Intent intent = new Intent(Login.this, MapViewActivity.class);
+        	//passa o id para a pr—xima atividade
+        	intent.putExtra("userId", 1);
 			startActivity(intent);
 		}else {
 			_dialog = new ProgressDialog(Login.this);
