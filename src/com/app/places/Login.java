@@ -29,7 +29,7 @@ public class Login extends Activity {
 
 	private EditText _username;
 	private EditText _password;
-	private boolean loginvalido;
+	private int _userId;
 	
 	private ProgressDialog _dialog;
 
@@ -86,6 +86,7 @@ public class Login extends Activity {
 											    " profile.password = " + pass );
 				while (rs.next()) {
 					Log.d("Login", "count " + count);
+					_userId = rs.getInt(1);
 					 count++;
 				}				
 		    	
@@ -105,7 +106,7 @@ public class Login extends Activity {
         if (result > 0){        	 
         	Intent intent = new Intent(Login.this, MapViewActivity.class);
         	//passa o id para a pr—xima atividade
-        	intent.putExtra("userId", 1);
+        	intent.putExtra("userId", _userId);
 			startActivity(intent);
 		}else {
 			_dialog = new ProgressDialog(Login.this);

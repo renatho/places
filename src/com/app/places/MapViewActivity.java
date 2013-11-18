@@ -13,6 +13,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
+import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -37,7 +38,9 @@ public class MapViewActivity extends MapActivity {
         Bundle extras = getIntent().getExtras();
         if(extras.containsKey("userId"))
     	{
+      
         	userId = extras.getInt("userId");
+        	Log.d("USERID", "" + userId);
     	}
 		
 		txtLocaisProximos = (TextView) findViewById(R.id.txtLocaisProximos);
@@ -84,8 +87,7 @@ public class MapViewActivity extends MapActivity {
 														  "profile.age >= places.min_age AND " +
 														  "DATE_FORMAT( CURRENT_TIMESTAMP( ) , '%H') >= places.min_hour AND " +
 														  "DATE_FORMAT( CURRENT_TIMESTAMP( ) , '%H') <= places.max_hour AND " +
-														  "profile.id = 2");
-				// ***** O 2 do select Ž o id do profile. Deve ser alterado quando o login estiver integrado.
+														  "profile.id = " + userId);
 				
 				count = 0;
 
