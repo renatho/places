@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
-    android:gravity="center"
     android:background="@drawable/background"
+    android:gravity="center"
     android:orientation="vertical" >
 
     <ImageView
@@ -14,46 +14,45 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/my_way" />
-    
+
     <EditText
         android:id="@+id/txt_email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"
         android:autoText="false"
+        android:background="@android:drawable/editbox_background"
         android:capitalize="none"
-        android:hint="Your E-mail" 
+        android:hint="Your E-mail"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/txt_user"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"
         android:autoText="false"
+        android:background="@android:drawable/editbox_background"
         android:capitalize="none"
-        android:hint="Username" 
+        android:hint="Username"
         android:inputType="textEmailAddress" />
-    
+
     <EditText
         android:id="@+id/txt_passw"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"
         android:autoText="false"
+        android:background="@android:drawable/editbox_background"
         android:capitalize="none"
-        android:hint="Password" 
+        android:hint="Password"
         android:inputType="textPassword" />
 
-    
     <EditText
         android:id="@+id/txt_age"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"
         android:autoText="false"
+        android:background="@android:drawable/editbox_background"
         android:capitalize="none"
-        android:hint="Your Age" 
+        android:hint="Your Age"
         android:inputType="number" />
 
     <TextView
@@ -72,8 +71,8 @@
         <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center" >
+            android:gravity="center"
+            android:orientation="horizontal" >
 
             <RadioButton
                 android:id="@+id/radio_Feminino"
@@ -87,30 +86,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Masculino" />
-
         </RadioGroup>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_Register"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:text="Register" />
+
+    <Button
+        android:id="@+id/btn_Cancel"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/btn_Register"
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Register" />
-
-        <Button
-            android:id="@+id/btn_Cancel"
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Cancel" />
-
+        android:gravity="center" >
     </LinearLayout>
 
 </LinearLayout>

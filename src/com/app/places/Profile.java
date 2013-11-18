@@ -6,6 +6,9 @@ public class Profile {
 	private String login;
 	private String password;
 	private int age;
+	private String sex;
+	
+
 	private ArrayList<Tags> tag;
 	
 	public String getLogin() {
@@ -38,5 +41,13 @@ public class Profile {
 	
 	public void setTag(ArrayList<Tags> tag) {
 		this.tag = tag;
+	}
+	
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = (sex).substring(1);
 	}
 }
