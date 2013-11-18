@@ -30,6 +30,9 @@ public class Login extends Activity {
 	private EditText _username;
 	private EditText _password;
 	private boolean loginvalido;
+	
+	private ProgressDialog _dialog;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class Login extends Activity {
 		btnLogin.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				Log.d(TAG, "Login");
+				_dialog = ProgressDialog.show(Login.this, "", "Loading. Please wait...", true);
 				LoginValidator v = new LoginValidator();
 				v.execute();
 			}
@@ -65,7 +69,7 @@ public class Login extends Activity {
 	
 	
 	public class LoginValidator extends AsyncTask<Integer, String, Integer> {
-		private ProgressDialog _dialog;
+		
 		@Override
 		protected Integer doInBackground(Integer... params) {
 	    	String user = "'" + _username.getText().toString().toLowerCase() + "'";
@@ -96,6 +100,8 @@ public class Login extends Activity {
 		
         @Override
         protected void onPostExecute(Integer result) {
+        	
+    	_dialog.dismiss();
         if (result > 0){
         	Intent intent = new Intent(Login.this, MapViewActivity.class);
 			startActivity(intent);

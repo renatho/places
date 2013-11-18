@@ -33,11 +33,11 @@ public class ProfileActivity extends Activity {
 	String sex;
 	String email;
 	
-	protected void onCreate(Bundle savedInstanceState) {
-		Log.d(TAG, "Entrou no onCreate");
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInstanceState) {		
+		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_profile);
 		
+		Log.d(TAG, "Entrou no onCreate");
 
 		_username = (EditText) findViewById(R.id.txt_user);
 		_password = (EditText) findViewById(R.id.txt_passw);
@@ -63,7 +63,7 @@ public class ProfileActivity extends Activity {
     	
     	// Cancel
     	Button btnCancel = (Button) findViewById(R.id.btn_Cancel);
-    	btnReg.setOnClickListener(new OnClickListener() {
+    	btnCancel.setOnClickListener(new OnClickListener() {
     		public void onClick(View view) {
     			Intent intent = new Intent(ProfileActivity.this, Login.class);
 				startActivity(intent);
