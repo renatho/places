@@ -26,11 +26,20 @@ public class MapViewActivity extends MapActivity {
 	Drawable drawable;
 	MapItemizedOverlay itemizedoverlay;
 	
+	private int userId;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 
+		 //get the Bundle out of the Intent...
+        Bundle extras = getIntent().getExtras();
+        if(extras.containsKey("userId"))
+    	{
+        	userId = extras.getInt("userId");
+    	}
+		
 		txtLocaisProximos = (TextView) findViewById(R.id.txtLocaisProximos);
     	mapView = (MapView) findViewById(R.id.mapview);
     	mapView.setBuiltInZoomControls(true);
