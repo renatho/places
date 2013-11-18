@@ -20,6 +20,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class ProfileActivity extends Activity {
+	private static final String TAG = ProfileActivity.class.getName();
+	
 	EditText _username;
 	EditText _password;
 	EditText _age;
@@ -32,20 +34,21 @@ public class ProfileActivity extends Activity {
 	String email;
 	
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.d("Profile", "Entrou no onCreate");
+		Log.d(TAG, "Entrou no onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 		
+
+		_username = (EditText) findViewById(R.id.txt_user);
+		_password = (EditText) findViewById(R.id.txt_passw);
 		
-		Log.d("REGI", "BEFORE IFS");
+		Log.d(TAG, "BEFORE IFS");
     	
     	// Registry
     	Button btnReg = (Button) findViewById(R.id.btn_Register);
     	btnReg.setOnClickListener(new OnClickListener() {
     		public void onClick(View view) {
-    			Log.d("REGI", "IF");
-    			_username = (EditText) findViewById(R.id.txt_user);
-    			_password = (EditText) findViewById(R.id.txt_passw);
+    			Log.d(TAG, "IF");
     			_age = (EditText) findViewById(R.id.txt_age);
     			_sex = (RadioButton) findViewById(R.id.radio_Feminino);
     			_email = (EditText) findViewById(R.id.txt_email);
@@ -79,7 +82,7 @@ public class ProfileActivity extends Activity {
 	
 		@Override
 		protected Integer doInBackground(Integer... params) {
-			Log.d("REG", "ENTROU NO MAX");
+			Log.d(TAG, "ENTROU NO MAX");
 			Profile prof = new Profile();
 			
 			// Username
@@ -103,7 +106,7 @@ public class ProfileActivity extends Activity {
 												" FROM profile" +
 												" WHERE profile.login = " + user );
 				while (rs.next()) {
-					Log.d("Login", "count " + count);
+					Log.d(TAG, "count " + count);
 					 count++;
 				}				
 		    	rs.close();
@@ -117,7 +120,7 @@ public class ProfileActivity extends Activity {
 		
         @Override
         protected void onPostExecute(Integer result) {
-        	Log.d("REG", result.toString());
+        	Log.d(TAG, result.toString());
         if (result > 0){
            new CreateProfile().execute();
 		}else {
@@ -163,7 +166,7 @@ public class ProfileActivity extends Activity {
 				ResultSet rs = db.executeQuery("SELECT MAX(profile.id) " +
 												" FROM profile");
 				while (rs.next()) {
-					Log.d("Login", "count " + count);
+					Log.d(TAG, "count " + count);
 					max = rs.getInt(1) + 1;
 				}				
 		    	rs.close();
@@ -181,7 +184,7 @@ public class ProfileActivity extends Activity {
 												" , " + pass + ", " + _age + 
 												", " + sex + "," + email + ")");
 				while (rs.next()) {
-					Log.d("Login", "count " + count);
+					Log.d(TAG, "count " + count);
 					 count++;
 				}				
 		    	rs.close();
