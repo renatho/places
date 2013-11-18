@@ -32,6 +32,7 @@ public class ProfileActivity extends Activity {
 	ProgressDialog _dialog;
 	String sex;
 	String email;
+	int age;
 	
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);		
@@ -52,11 +53,7 @@ public class ProfileActivity extends Activity {
     			_age = (EditText) findViewById(R.id.txt_age);
     			_sex = (RadioButton) findViewById(R.id.radio_Feminino);
     			_email = (EditText) findViewById(R.id.txt_email);
-    	    	user = "'" + _username.toString().toLowerCase() + "'";
-    	    	pass = "'" + _password.toString().toLowerCase() + "'";
-    	    	email = "'" + _email.toString().toLowerCase() + "'";
-    	    	
-    			ValidateProfile v = new ValidateProfile();
+    	    	ValidateProfile v = new ValidateProfile();
     			v.execute();
     		}
     	});
@@ -121,7 +118,7 @@ public class ProfileActivity extends Activity {
         @Override
         protected void onPostExecute(Integer result) {
         	Log.d(TAG, result.toString());
-        if (result > 0){
+        if (result <= 0){
            new CreateProfile().execute();
 		}else {
 			_dialog = new ProgressDialog(ProfileActivity.this);
@@ -149,49 +146,57 @@ public class ProfileActivity extends Activity {
 			// Username
 			prof.setLogin((_username.getText()).toString());
 			prof.setPassword((_password.getText()).toString());
-			prof.setAge(Integer.parseInt((_age.getText()).toString()));
+			prof.setAge(Integer.parseInt((_age.getText().toString())));
 			if (_sex.isChecked()){
-				prof.setSex(_sex.toString());
+				prof.setSex(_sex.getText().toString());
 			}else{
 				_sex = (RadioButton) findViewById(R.id.radio_Masculino);
-				prof.setSex(_sex.toString());
+				prof.setSex(_sex.getText().toString());
 			}
-			
 			int count = 0;
 			int max = 0;
 	    	// Chama dados do banco
-			DatabaseHelper db = new DatabaseHelper();
+			DatabaseHelper bd = new DatabaseHelper();
 			try {
-				db.open();
-				ResultSet rs = db.executeQuery("SELECT MAX(profile.id) " +
+				bd.open();
+				ResultSet rs = bd.executeQuery("SELECT MAX(profile.id) " +
 												" FROM profile");
 				while (rs.next()) {
 					Log.d(TAG, "count " + count);
 					max = rs.getInt(1) + 1;
 				}				
 		    	rs.close();
-				db.close();
+		    	bd.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	        
-			sex = "'" + _password.toString().toLowerCase() + "'";
-	        
+			user = "'" + _username.getText().toString() + "'";
+	    	user = user.toLowerCase();
+	    	pass = "'" + _password.getText().toString()+ "'";
+	    	pass = pass.toLowerCase() ;
+	    	email = "'" + _email.getText().toString() + "'";
+	    	email = email.toLowerCase();
+	    	age = Integer.parseInt((_age.getText()).toString());
+			
+			sex = "'" + prof.getSex().toLowerCase() + "'";
+			Log.d(TAG, "insert into profile " +
+					" values (" + max + ", " + user +
+					" , " + pass + ", " + age + 
+					", " + sex + ", " + email + ")");
+			
+			DatabaseHelper db = new DatabaseHelper();
+			
 			try {
 				db.open();
-				ResultSet rs = db.executeQuery("INSERT INTO profile " +
-												" values (" + max + ", " + user +
-												" , " + pass + ", " + _age + 
-												", " + sex + "," + email + ")");
-				while (rs.next()) {
-					Log.d(TAG, "count " + count);
-					 count++;
-				}				
-		    	rs.close();
+				db.executeUpdate("insert into profile " +
+								 " values (" + max + ", " + user +
+								 " , " + pass + ", " + age + 
+								 ", " + sex + ", " + email + ")");
 				db.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			count = 1;
 			return count;
 	    	
 		}

@@ -2,6 +2,8 @@ package com.app.places;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class Profile {
 	private String login;
 	private String password;
@@ -48,6 +50,6 @@ public class Profile {
 	}
 
 	public void setSex(String sex) {
-		this.sex = (sex).substring(1);
+		this.sex = (sex).substring(0, 1);
 	}
 }
