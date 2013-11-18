@@ -8,9 +8,13 @@ import com.google.android.maps.OverlayItem;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.CursorJoiner.Result;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,12 +22,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 public class Login extends Activity {
 
 	private static final String TAG = Login.class.getName();
 
 	private EditText _username;
 	private EditText _password;
+	private boolean loginvalido;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +46,8 @@ public class Login extends Activity {
 		btnLogin.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				Log.d(TAG, "Login");
-				new LoginValidator().execute();
-				/*
-				Intent intent = new Intent(Login.this, MapViewActivity.class);
-				startActivity(intent);*/
+				LoginValidator v = new LoginValidator();
+				v.execute();
 			}
 		});
 		
@@ -61,7 +65,7 @@ public class Login extends Activity {
 	
 	
 	public class LoginValidator extends AsyncTask<Integer, String, Integer> {
-
+		private ProgressDialog _dialog;
 		@Override
 		protected Integer doInBackground(Integer... params) {
 	    	String user = "'" + _username.getText().toString().toLowerCase() + "'";
@@ -92,7 +96,23 @@ public class Login extends Activity {
 		
         @Override
         protected void onPostExecute(Integer result) {
-        	Log.d("Login", "restul " + result);
+        if (result > 0){
+        	Intent intent = new Intent(Login.this, MapViewActivity.class);
+			startActivity(intent);
+		}else {
+			_dialog = new ProgressDialog(Login.this);
+			_dialog.setMessage("Login does not match");
+			_dialog.setCancelable(false);
+			_dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Ok", new DialogInterface.OnClickListener() {
+			    @Override
+			    public void onClick(DialogInterface dialog, int which) {
+			        dialog.dismiss();
+			    }
+			});
+			_dialog.show();
+			//_dialog = ProgressDialog.show(Login.this, "Error", "Login does not match", false, true);
+			}
+		
         }
 		
 	}
