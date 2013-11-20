@@ -3,6 +3,7 @@ package com.app.places;
 import java.sql.ResultSet;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.google.android.maps.OverlayItem;
 
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MapViewActivity extends MapActivity {
@@ -28,6 +30,18 @@ public class MapViewActivity extends MapActivity {
 	MapItemizedOverlay itemizedoverlay;
 	
 	private int userId;
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.create_tags:
+	            startActivity(new Intent(MapViewActivity.this, TagActivity.class));
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

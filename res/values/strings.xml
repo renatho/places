@@ -2,5 +2,7 @@
 <resources>
     <string name="app_name">MyWay</string>
     <string name="action_settings">Settings</string>
+    <string name="action_tags">Tags</string>
+    <string name="action_profile">Profile</string>
     <string name="txtLocaisProximos">Locais próximos:</string>
 </resources>

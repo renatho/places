@@ -9,7 +9,6 @@ public class Profile {
 	private String password;
 	private int age;
 	private String sex;
-	
 
 	private ArrayList<Tags> tag;
 	

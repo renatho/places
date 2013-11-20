@@ -52,7 +52,7 @@ public class ProfileActivity extends Activity {
     			Log.d(TAG, "IF");
     			_age = (EditText) findViewById(R.id.txt_age);
     			_sex = (RadioButton) findViewById(R.id.radio_Feminino);
-    			_email = (EditText) findViewById(R.id.txt_email);
+    			_email = (EditText) findViewById(R.id.txt_tag);
     	    	ValidateProfile v = new ValidateProfile();
     			v.execute();
     		}
@@ -112,7 +112,6 @@ public class ProfileActivity extends Activity {
 				e.printStackTrace();
 			}
 			return count;
-	    	
 		}
 		
         @Override
@@ -132,9 +131,7 @@ public class ProfileActivity extends Activity {
 			});
 			_dialog.show();
 			}
-		
         }
-		
 	}
 	
 	public class CreateProfile extends AsyncTask<Integer, String, Integer> {
