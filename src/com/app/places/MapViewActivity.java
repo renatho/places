@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
@@ -64,6 +65,11 @@ public class MapViewActivity extends MapActivity {
     	mapOverlays = mapView.getOverlays();
     	drawable = this.getResources().getDrawable(R.drawable.marker_map);
     	itemizedoverlay = new MapItemizedOverlay(drawable, this);
+    	
+    	// My location overlay
+		MyLocationOverlay myLocationOverlay = new MyLocationOverlay(getBaseContext(), mapView);
+    	mapOverlays.add(myLocationOverlay);
+    	myLocationOverlay.enableMyLocation();
 
     	new loadPins().execute();
 	}
